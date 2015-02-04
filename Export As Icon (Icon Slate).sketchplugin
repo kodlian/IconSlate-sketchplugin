@@ -170,7 +170,7 @@ function remove(path) {
         
         var app = [SBApplication application:"Icon Slate"]
         if (app == nil) {
-            showAlert("This plguin requires Icon Slate.")
+            showAlert("This plugin requires Icon Slate.")
             return
         }
         var directory = getUserDefault('directory','~/Documents/')
