@@ -1,0 +1,10 @@
+// Sketch Plugin: Generate Icon Skate
+// Source: github.com/kodlian/IconSlate-sketchplugin
+// Version: 1.1
+
+#import 'common.js'
+
+// Main
+(function() {
+   main({combineArtboard:true, onlyCurrentPage:true})
+})();
