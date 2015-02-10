@@ -6,5 +6,5 @@
 
 // Main
 (function() {
-   main({combineArtboard:false, onlyCurrentPage:false})
+   main({combineArtboard:true, onlyCurrentPage:false})
 })();
