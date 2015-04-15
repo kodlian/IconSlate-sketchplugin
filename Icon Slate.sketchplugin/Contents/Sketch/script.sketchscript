@@ -1,10 +1,5 @@
-// Sketch Plugin: Generate Icon Skate
-// Source: github.com/kodlian/IconSlate-sketchplugin
-// Version: 1.0
-
-// Filename increment
+// Filename
 FileNames = {}
-
 function fileName(name){
     if (FileNames[name] != undefined) {
         FileNames[name] = FileNames[name] + 1
@@ -17,8 +12,7 @@ function fileName(name){
 }
 
 // Export
-function exportDoc(option) {
-
+function exportDocument(document,option) {
     // Temp folder
     var directory = NSTemporaryDirectory()
     directory +=  'sketch.iconsexport/'
@@ -28,32 +22,32 @@ function exportDoc(option) {
     [m createDirectoryAtPath:directory withIntermediateDirectories:false attributes:nil error:null];
 
     // Export PNG
-    var currentPage = [doc currentPage],
+    var currentPage = [document currentPage],
     success = false
 
     if (option.onlyCurrentPage == true) {
-        success = exportPage(currentPage, directory, option)
+        success = exportPage(document, currentPage, directory, option)
     }
     else {
-        var pageCount = [[doc pages] count]
+        var pageCount = [[document pages] count]
         for (var p = 0; p < pageCount; p++) {
-            var page = [doc pages][p]
-            [doc setCurrentPage:page] // Set current page to be able to export correctly the artboard
+            var page = [document pages][p]
+            [document setCurrentPage:page] // Set current page to be able to export correctly the artboard
 
-            if(exportPage(page, directory, option)) {
+            if(exportPage(document, page, directory, option)) {
                 success = true
             }
         }
-        [doc setCurrentPage:currentPage] // Restore current page
+        [document setCurrentPage:currentPage] // Restore current page
     }
 
     if (success) {
-        [[NSWorkspace sharedWorkspace] openFile:directory]
+      [[NSWorkspace sharedWorkspace] openFile:directory withApplication:'Icon Slate' andDeactivate:true];
     }
-
     return success
 }
-function exportPage(page, directory, option) {
+
+function exportPage(document, page, directory, option) {
     var artboardCount = [[page artboards] count],
     success = false
 
@@ -72,7 +66,7 @@ function exportPage(page, directory, option) {
             artboardFilename += artboardName +'/'
         }
         artboardFilename += artboardName+'.png'
-        [doc saveArtboardOrSlice:artboard toFile:artboardFilename]
+        [document saveArtboardOrSlice:artboard toFile:artboardFilename]
         success = true
     }
 
@@ -85,13 +79,15 @@ function showAlert(message) {
 }
 
 // Main
-function main(option) {
-      try {
-          if (!exportDoc(option)){
-              showAlert("There is nothing to export. Create at least one artboard.")
-              return
-          }
-      } catch(e) {
-          log(e)
-      }
+var options = {
+    exportAllArtboards: {combineArtboard:false, onlyCurrentPage:false},
+    exportAllPages: {combineArtboard:true, onlyCurrentPage:false},
+    exportCurrentPage: {combineArtboard:true, onlyCurrentPage:true},
+    exportCurrentPageArtboard: {combineArtboard:false, onlyCurrentPage:true}
 }
+
+var onRun = function(context) {
+ var command = context.command;
+ var commandId = [command identifier];
+ exportDocument(context.document,options[commandId])
+};
