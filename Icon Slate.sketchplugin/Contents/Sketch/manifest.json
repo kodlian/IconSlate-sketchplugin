@@ -3,10 +3,10 @@
     "description": "Export icons with Icon Slate",
     "author": "Jeremy Marchand",
     "homepage": "https://github.com/kodlian/iconslate-sketchplugin",
-    "version": 1.1,
+    "version": 1.2,
     "identifier": "com.kodlian.Icon-Slate.sketch-plugins",
     "updateURL": "https://github.com/kodlian/iconslate-sketchplugin/Icon Slate.sketchplugin",
-    "compatibleVersion": 3.3,
+    "compatibleVersion": 41,
     "bundleVersion": 1,
     "commands":
         [
@@ -14,25 +14,25 @@
             "name": "Export All Artboards",
             "identifier": "exportAllArtboards",
             "shortcut": "cmd ctrl e",
-            "script": "script.sketchscript"
+            "script": "script.cocoascript"
           },
           {
             "name": "Export All Pages (Artboards combined)",
             "identifier": "exportAllPages",
             "shortcut": "cmd alt e",
-            "script": "script.sketchscript"
+            "script": "script.cocoascript"
           },
           {
             "name": "Export Current Page (Artboards combined)",
             "identifier": "exportCurrentPage",
             "shortcut": "",
-            "script": "script.sketchscript"
+            "script": "script.cocoascript"
           },
           {
             "name": "Export Current Page's Artboards",
             "identifier": "exportCurrentPageArtboard",
             "shortcut": "",
-            "script": "script.sketchscript"
+            "script": "script.cocoascript"
           }
         ],
     "menu":
